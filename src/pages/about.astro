@@ -1,3 +1,33 @@
+---
+import '../styles/global.css'
+import Navigation  from '../components/Navigation.astro'
+const pageTitle = "About me";
+const identity = {
+	firstName: "Konstantin",
+	lastName: "Kostadinov",
+	country: "Bulgaria",
+	occupation: "Front-end head developer",
+	hobbies: ["reading", "chess", "traveling", "photography"],
+};
+const skills = [
+	"HTML",
+	"CSS/SASS",
+	"JS",
+	"D3",
+	"Vue",
+	"React",
+	"Node",
+	"Astro",
+	"Writing Docs",
+];
+const happy = true;
+const finished = false;
+const goal = 3;
+const skillColor = "crimson";
+const fontWeight = 600;
+const textCase = "uppercase"
+---
+
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
@@ -18,21 +48,49 @@
 			name="generator"
 			content={Astro.generator}
 		/>
-		<title>Astro KIK</title>
+		<title>{pageTitle}</title>
+		<style define:vars={{ skillColor, fontWeight, textCase }}>
+			h1 {
+				color: purple;
+				font-size: 4rem;
+			}
+			.skill {
+				color: var(--skillColor);
+				font-weight: var(--fontWeight);
+				text-transform: var(--textCase);
+			}
+		</style>
 	</head>
 	<body>
-		<header>
-			<div>
-				<a href="/">Home</a>
-			</div>
-			<div>
-				<a href="/about">About</a>
-			</div>
-			<div>
-				<a href="/articles">Articles</a>
-			</div>
-		</header>
-		<h1>About this project</h1>
-        <p>Nothing special. Just playing around and discovering the powers of astro.</p>
+		<Navigation />
+		<h1>{pageTitle}</h1>
+		<p>A few facts for me:</p>
+		<ul>
+			<li>My name is {identity.firstName}</li>
+			<p>
+				I live in {identity.country} and I work as {identity.occupation}
+			</p>
+			{
+				identity.hobbies.length >= 2 && (
+					<li>
+						Tow of my hobbies are: {identity.hobbies[0]} and{" "}
+						{identity.hobbies[1]}
+					</li>
+				)
+			}
+		</ul>
+		<p>My skills are:</p>
+		<ul>
+			{skills.map((skill) => <li class="skill">{skill}</li>)}
+		</ul>
+		{happy && <p>I am happy to be learning Astro!</p>}
+		{finished && <p>I finished this tutorial!</p>}
+		{
+			goal === 3 ? (
+				<p>My goal is to finish in 3 days.</p>
+			) : (
+				<p>My goal is not 3 days.</p>
+			)
+		}
 	</body>
 </html>
