@@ -1,5 +1,6 @@
 ---
 import Header  from '../components/Header.astro'
+import Footer  from '../components/Footer.astro'
 const pageTitle = "About me";
 const identity = {
 	firstName: "Konstantin",
@@ -91,5 +92,9 @@ const textCase = "uppercase"
 				<p>My goal is not 3 days.</p>
 			)
 		}
+		<Footer />
+		<script>
+			import "../scripts/main.js";
+		</script>
 	</body>
 </html>
